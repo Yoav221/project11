@@ -1,7 +1,7 @@
 import os
 from CompilationEngine import CompilationEngine
 
-class JackAnalyzer:
+class JackCompiler:
     def __init__(self, input_path):
         """
         Initialize the analyzer with either a .jack file or a directory containing .jack files.
@@ -37,15 +37,7 @@ class JackAnalyzer:
         """
         Process a single .jack file by creating a CompilationEngine and calling compile_class().
         """
-        output_file = jack_file[:-5] + '.xml'  # remove .jack and add .xml
-
-        try:
-            engine = CompilationEngine(jack_file, output_file)
-            engine.compile_class()
-            engine.close()
-            print(f"Successfully processed {jack_file} -> {output_file}")
-        except Exception as e:
-            print(f"Error processing {jack_file}: {str(e)}")
-            if os.path.exists(output_file):
-                os.remove(output_file)
-            raise
+        output_file = jack_file[:-5] + '.vm'
+        engine = CompilationEngine(jack_file, output_file)
+        engine.compile_class()
+        engine.close()
