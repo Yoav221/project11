@@ -1,5 +1,6 @@
 import os
 from CompilationEngine import CompilationEngine
+import sys
 
 class JackCompiler:
     def __init__(self, input_path):
@@ -41,3 +42,19 @@ class JackCompiler:
         engine = CompilationEngine(jack_file, output_file)
         engine.compile_class()
         engine.close()
+
+
+def main():
+    # Usage: python JackCompiler.py path/to/MyProgram.jack
+    #    or: python JackCompiler.py path/to/DirectoryOfJackFiles
+    if len(sys.argv) != 2:
+        print("Usage: python JackCompiler.py <input_path>")
+        sys.exit(1)
+
+    input_path = sys.argv[1]
+    compiler = JackCompiler(input_path)
+    compiler.analyze()
+    print('finished!')
+
+if __name__ == "__main__":
+    main()
